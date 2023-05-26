@@ -26,8 +26,8 @@
             <a class="nav-link" href="/"></a>
         </ul>
         <div class="d-flex" role="search">
-          <a href="/login"><button class="btn btn-primary mx-2" type="submit">Login</button></a>
-          <a href="/login"><button class="btn btn-primary mx-2" type="submit">Login</button></a>
+          <a href="/login"><button class="btn btn-primary mx-2" type="submit">refresh</button></a>
+          <a href="/login"><button class="btn btn-primary mx-2" type="submit">refresh</button></a>
         </div>
       </div>
     </div>
@@ -36,16 +36,16 @@
     <h1 class="my-4">Data </h1>
     <div>
       <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
+        <label for="email" class="form-label">id_Email address</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" pattern="^[^\s]+$" required>
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">id_Password</label>
         <input type="password" class="form-control" id="password" required>
       </div>
 
-      <button id="submit" type="submit" class="btn btn-primary">Login</button>
+      <button id="submit" type="submit" class="btn btn-primary">id_Submit</button>
     </div>
 
   </div>
@@ -54,7 +54,6 @@
     crossorigin="anonymous"></script>
   <script>
     async function postData(url = "", data = {}) {
-      // Default options are marked with *
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -67,7 +66,6 @@
     }
 
     // submit button 
-
     let submit = document.getElementById("submit")
     submit.addEventListener("click", async () => {
       let email = document.getElementById("email").value
@@ -77,7 +75,6 @@
       console.log(resp)
 
       // alert massage about validation of data 
-
       if (resp.success) {
         alert("data correct  - saved in server ")
         localStorage.setItem("user", JSON.stringify(resp.user))
@@ -85,7 +82,7 @@
         document.getElementById("password").value = ""
       }
       else { 
-        alert("data incorrect")
+        alert("data undefined or null")
         localStorage.setItem("user", JSON.stringify(resp.user))
         document.getElementById("email").value = ""
         document.getElementById("password").value = ""
