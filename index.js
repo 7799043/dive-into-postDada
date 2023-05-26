@@ -18,9 +18,9 @@ mongoose.connect('mongodb://leoniakmaciek1:rkqMA30u@ac-ig4sdoa-shard-00-02.yamms
 
 // Endpoints to server the
 
-// app.get('/login', (req, res) => {
-//     res.sendFile("pages/login.html", { root: __dirname })
-// })
+app.get('/login', (req, res) => {
+    res.sendFile("pages/login.html", { root: __dirname })
+})
 
 // Endpoints for APIs
 
