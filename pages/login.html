@@ -17,7 +17,7 @@
       <div class="mb-3">
         <label for="email" class="form-label">id_Email address</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" pattern="^[^\s]+$" required>
-        
+
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">id_Password</label>
@@ -31,7 +31,7 @@
       <button id="newuser" type="submit" class="btn btn-success">id_newUser</button>
       <button id="clearstorage" type="submit" class="btn btn-warning">id_clearStorage</button>
     </div>
-        <!-- BUTTON SECTION -->
+    <!-- BUTTON SECTION -->
 
 
   </div>
@@ -53,13 +53,15 @@
       return rdata;
     }
 
-    // BUTTON WORKFLOWS 
+    // BUTTON WORKFLO
+
+    //FOR SUBMIT BUTTON
     let submit = document.getElementById("submit")
     submit.addEventListener("click", async () => {
       let email = document.getElementById("email").value
       let password = document.getElementById("password").value
       console.log("Submitting this data", password, email)
-      let resp = await postData('/login', { email, password });
+      let resp = await postData('/submit', { email, password });
       console.log(resp)
 
       // alert massage about validation of data 
@@ -69,7 +71,7 @@
         document.getElementById("email").value = ""
         document.getElementById("password").value = ""
       }
-      else { 
+      else {
         alert("data undefined or null")
         localStorage.setItem("user", JSON.stringify(resp.user))
         document.getElementById("email").value = ""
@@ -77,8 +79,27 @@
 
       }
     })
+    //FOR SUBMIT BUTTON
+
+
+    //FOR NEWUSER BUTTON
+    let newUser = document.getElementById("newuser")
+    newUser.addEventListener("click", async () => {
+      let email = document.getElementById("email").value
+      let password = document.getElementById("password").value
+      console.log("Submitting this data", password, email)
+      let resp = await postData('/newUser', { email, password });
+      console.log(resp)
+      if (resp.success) {
+        alert("newUser Created. Data saved in the server.")
+        document.getElementById("email").value = ""
+        document.getElementById("password").value = ""
+      }
+    })
+    //FOR NEWUSER BUTTON
+
     // BUTTON WORKFLOWS 
-        </script>
+  </script>
 </body>
 
 </html>
