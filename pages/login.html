@@ -121,6 +121,8 @@
         // Check if the deletion from the database was successful
         if (resp.success) {
           console.log('User deleted.');
+          localStorage.clear();
+          alert("User deleted.")
 
           // Clear email and password fields
           document.getElementById("email").value = "";
