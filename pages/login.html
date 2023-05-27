@@ -30,6 +30,7 @@
       <button id="delete" type="submit" class="btn btn-danger">id_delete</button>
       <button id="newuser" type="submit" class="btn btn-success">id_newUser</button>
       <button id="clearstorage" type="submit" class="btn btn-warning">id_clearStorage</button>
+      <button id="share" type="submit" class="btn btn-primary">id_share</button>
     </div>
     <!-- BUTTON SECTION -->
 
@@ -138,6 +139,21 @@
 
     //FOR delete BUTTON
 
+    //FOR newUser BUTTON
+    let share = document.getElementById("share")
+    share.addEventListener("click", () => {
+      // let email = document.getElementById("email").value
+      // let password = document.getElementById("password").value
+      // console.log("Submitting this data", password, email)
+      // let resp = await postData('/share', { email, password });
+      alert("You shared this.")
+      // if (resp.success) {
+      //   alert("You shared this.")
+      //   document.getElementById("email").value = ""
+      //   document.getElementById("password").value = ""
+      // }
+    })
+    //FOR newUser BUTTON
 
     // BUTTON WORKFLOWS 
   </script>
