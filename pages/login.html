@@ -98,14 +98,43 @@
     })
     //FOR newUser BUTTON
 
-     //FOR clearStorage BUTTON = "logout"
-     let clearStorage = document.getElementById("clearstorage")
-     clearStorage.addEventListener("click",  () => {
+    //FOR clearStorage BUTTON = "logout"
+    let clearStorage = document.getElementById("clearstorage")
+    clearStorage.addEventListener("click", () => {
       localStorage.clear();
       alert("clearstorage")
-      })
-     //FOR clearStorage BUTTON = "logout"
+    })
+    //FOR clearStorage BUTTON = "logout"
 
+    //FOR delete BUTTON
+
+    const userDelete = document.getElementById("delete");
+    userDelete.addEventListener("click", async () => {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      console.log("delete", password, email);
+
+      try {
+        // API call to delete a user
+        let resp = await postData('/deleteUser', { email, password });
+
+        // Check if the deletion from the database was successful
+        if (resp.success) {
+          console.log('User deleted.');
+
+          // Clear email and password fields
+          document.getElementById("email").value = "";
+          document.getElementById("password").value = "";
+        } else {
+          console.log('Error deleting user.');
+        }
+      } catch (error) {
+        console.error('Error calling API:', error);
+      }
+    });
+
+
+    //FOR delete BUTTON
 
 
     // BUTTON WORKFLOWS 

@@ -36,6 +36,28 @@ app.post('/newUser', async (req, res) => {
     res.status(200).json({ success: true, user: user })
 })
 
+app.post('/deleteUser', async (req, res) => {
+    const { email, password } = req.body;
+    console.log(req.body);
+
+    try {
+        // Check if the user with the given email and password exists
+        const user = await User.findOne({ email, password });
+
+        if (user) {
+            // Delete the user
+            await User.deleteOne({ _id: user._id });
+            res.status(200).json({ success: true, message: "User deleted" });
+        } else {
+            res.status(404).json({ success: false, message: "User not found" });
+        }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}/login`)
