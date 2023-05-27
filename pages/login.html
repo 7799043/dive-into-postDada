@@ -53,9 +53,9 @@
       return rdata;
     }
 
-    // BUTTON WORKFLO
+    // BUTTON WORKFLOWS
 
-    //FOR SUBMIT BUTTON
+    //FOR submit BUTTON
     let submit = document.getElementById("submit")
     submit.addEventListener("click", async () => {
       let email = document.getElementById("email").value
@@ -79,10 +79,10 @@
 
       }
     })
-    //FOR SUBMIT BUTTON
+    //FOR submit BUTTON
 
 
-    //FOR NEWUSER BUTTON
+    //FOR newUser BUTTON
     let newUser = document.getElementById("newuser")
     newUser.addEventListener("click", async () => {
       let email = document.getElementById("email").value
@@ -96,7 +96,17 @@
         document.getElementById("password").value = ""
       }
     })
-    //FOR NEWUSER BUTTON
+    //FOR newUser BUTTON
+
+     //FOR clearStorage BUTTON = "logout"
+     let clearStorage = document.getElementById("clearstorage")
+     clearStorage.addEventListener("click",  () => {
+      localStorage.clear();
+      alert("clearstorage")
+      })
+     //FOR clearStorage BUTTON = "logout"
+
+
 
     // BUTTON WORKFLOWS 
   </script>
