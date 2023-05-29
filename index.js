@@ -45,6 +45,8 @@ app.post('/deleteUser', async (req, res) => {
         const user = await User.findOne({ email, password });
 
         if (user) {
+            console.log('Deleting user with ID:', user._id); // Dodany console log
+
             // Delete the user
             await User.deleteOne({ _id: user._id });
             res.status(200).json({ success: true, message: "User deleted" });

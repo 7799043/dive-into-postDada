@@ -41,6 +41,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <script>
     async function postData(url = "", data = {}) {
       const response = await fetch(url, {
@@ -142,9 +144,23 @@
     //FOR share BUTTON
     let share = document.getElementById("share")
     share.addEventListener("click", () => {
-   
-      alert("You shared this.")
-    
+      Swal.fire({
+        title: 'Enter your email address',
+        input: 'email',
+        showCancelButton: true,
+        confirmButtonText: 'Send',
+        cancelButtonText: 'Cancel',
+        showLoaderOnConfirm: true,
+        preConfirm: (email) => {
+          // Here you can call the function to send the email with the entered email address
+          // e.g. sendEmail(email);
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Email Sent!', `Email address: ${result.value}`, 'success');
+        }
+      });
+
     })
     //FOR share BUTTON
 
