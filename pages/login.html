@@ -31,6 +31,9 @@
       <button id="newuser" type="submit" class="btn btn-success">id_newUser</button>
       <button id="clearstorage" type="submit" class="btn btn-warning">id_clearStorage</button>
       <button id="share" type="submit" class="btn btn-primary">id_share</button>
+      <button id="theme-toggle-button">day/night view</button>
+
+
     </div>
     <!-- BUTTON SECTION -->
 
@@ -42,6 +45,70 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+   'use strict'
+
+const storedTheme = localStorage.getItem('theme')
+
+const getPreferredTheme = () => {
+  if (storedTheme) {
+    return storedTheme
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const setTheme = function (theme) {
+  if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-bs-theme', 'dark')
+  } else {
+    document.documentElement.setAttribute('data-bs-theme', theme)
+  }
+}
+
+setTheme(getPreferredTheme())
+
+const showActiveTheme = (theme, focus = false) => {
+  const toggleButton = document.getElementById('theme-toggle-button');
+  
+  if (theme === 'dark') {
+    toggleButton.innerText = '🌙'; 
+    toggleButton.style.backgroundColor = '#34495e'; 
+    toggleButton.style.color = '#fff'; 
+  } else {
+    toggleButton.innerText = '☀️'; 
+    toggleButton.style.backgroundColor = '#f1c40f'; 
+    toggleButton.style.color = '#000'; 
+  }
+  
+  if (focus) {
+    toggleButton.focus();
+  }
+}
+
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (storedTheme !== 'light' || storedTheme !== 'dark') {
+    setTheme(getPreferredTheme())
+  }
+})
+
+window.addEventListener('DOMContentLoaded', () => {
+  showActiveTheme(getPreferredTheme())
+
+  const themeToggleButton = document.querySelector('#theme-toggle-button')
+  themeToggleButton.addEventListener('click', () => {
+    const currentTheme = localStorage.getItem('theme')
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+    localStorage.setItem('theme', newTheme)
+    setTheme(newTheme)
+    showActiveTheme(newTheme, true)
+  })
+})
+
+</script>
+
 
   <script>
     async function postData(url = "", data = {}) {
@@ -104,7 +171,7 @@
     //FOR clearStorage BUTTON = "logout"
     let clearStorage = document.getElementById("clearstorage")
     clearStorage.addEventListener("click", () => {
-      localStorage.clear();
+       localStorage.removeItem('user');
       alert("clearstorage")
     })
     //FOR clearStorage BUTTON = "logout"
@@ -124,7 +191,7 @@
         // Check if the deletion from the database was successful
         if (resp.success) {
           console.log('User deleted.');
-          localStorage.clear();
+          localStorage.removeItem('user');
           alert("User deleted.")
 
           // Clear email and password fields
