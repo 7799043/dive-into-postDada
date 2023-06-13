@@ -240,6 +240,33 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     //FOR share BUTTON
 
+     //FOR userFind BUTTON
+
+    let userFind = document.getElementById("finder")
+    userFind.addEventListener("click", async () => {
+      let email = document.getElementById("email").value
+      let resp = await postData('/userfind', { email });
+      console.log(resp)
+
+      // alert massage about validation of data 
+      if (resp.success) {
+        alert("data correct  - occur in the server ")
+        localStorage.setItem("user", JSON.stringify(resp.user))
+        document.getElementById("email").value = ""
+        document.getElementById("password").value = ""
+      }
+      else {
+        alert("data undefined or null")
+        localStorage.setItem("user", JSON.stringify(resp.user))
+        document.getElementById("email").value = ""
+        document.getElementById("password").value = ""
+
+      }
+    })
+
+     //FOR userFind BUTTON
+
+
     // BUTTON WORKFLOWS 
   </script>
 </body>

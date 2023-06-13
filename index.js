@@ -59,6 +59,18 @@ app.post('/deleteUser', async (req, res) => {
     }
 });
 
+// Endpoints for APIs
+app.post('/userfind', async (req, res) => {
+    let user = await User.findOne(req.body)
+    console.log(user)
+    if (!user) {
+        res.status(200).json({ success: false, massage: "No user found" })
+    } else {
+        res.status(200).json({ success: true, user: { email: user.email }, massage: "User found" })
+    }
+    // res.sendFile("pages/signup.html", { root: __dirname })
+})
+
 
 
 app.listen(port, () => {
