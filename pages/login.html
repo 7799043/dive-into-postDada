@@ -26,7 +26,7 @@
       </div>
       <div class="mb-3">
         <label for="userfind" class="user-find">userFind</label>
-        <input type="text" class="form-control" id="userFind">
+        <input type="text" class="form-control" id="finder">
 
       </div>
 
@@ -39,7 +39,7 @@
       <button id="newuser" type="submit" class="btn btn-success">id_newUser</button>
       <button id="clearstorage" type="submit" class="btn btn-warning">id_clearStorage</button>
       <button id="share" type="submit" class="btn btn-primary">id_share</button>
-      <button id="finder" type="submit" class="btn btn-danger">userFind</button>
+      <button id="finderBtn" type="submit" class="btn btn-danger">finder</button>
       <button id="theme-toggle-button">day/night view</button>
 
 
@@ -240,31 +240,31 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     //FOR share BUTTON
 
-     //FOR userFind BUTTON
+     //FOR finderBtn BUTTON
 
-    let userFind = document.getElementById("finder")
-    userFind.addEventListener("click", async () => {
-      let email = document.getElementById("email").value
+    let finderButton = document.getElementById("finderBtn")
+    finderButton.addEventListener("click", async () => {
+      let email = document.getElementById("finder").value
       let resp = await postData('/userfind', { email });
       console.log(resp)
 
       // alert massage about validation of data 
       if (resp.success) {
-        alert("data correct  - occur in the server ")
+        alert("user exists ")
         localStorage.setItem("user", JSON.stringify(resp.user))
-        document.getElementById("email").value = ""
-        document.getElementById("password").value = ""
+        document.getElementById("finder").value = ""
+       
       }
       else {
         alert("data undefined or null")
         localStorage.setItem("user", JSON.stringify(resp.user))
-        document.getElementById("email").value = ""
-        document.getElementById("password").value = ""
+        document.getElementById("finder").value = ""
+        
 
       }
     })
 
-     //FOR userFind BUTTON
+     //FOR finderBtn BUTTON
 
 
     // BUTTON WORKFLOWS 
