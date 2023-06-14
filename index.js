@@ -30,7 +30,7 @@ app.post('/submit', async (req, res) => {
 })
 
 app.post('/newUser', async (req, res) => {
-    const { userToken } = req.body
+    // const { email, password } = req.body
     console.log(req.body)
     let user = await User.create(req.body)
     res.status(200).json({ success: true, user: user })
@@ -76,3 +76,5 @@ app.post('/userfind', async (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}/login`)
 })
+
+module.exports=app
