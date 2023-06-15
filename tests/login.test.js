@@ -2,13 +2,13 @@ const request = require('supertest');
 const app = require('../index');
 const User = require('../models/User');
 
-describe('POST /newUser',  () => {
+describe('POST /newUser', () => {
   it('should create a new user', async () => {
-  
+    let newUser = { email: '2@work.now', password: 'yesterday_not' };
 
-    const response =  await request(app)
+    const response = await request(app)
       .post('/newUser')
-      .send({ email: 'bu@ba.com', password: 'fatima' });
+      .send(newUser);
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
@@ -16,9 +16,10 @@ describe('POST /newUser',  () => {
     expect(response.body.user.password).toBe(newUser.password);
 
     const createdUser = await User.findOne({ email: newUser.email });
-    expect(createdUser).toBeTruthy();
+    if (createdUser) {
+      console.log('Użytkownik istnieje:', createdUser);
+    }
 
-    
-    await new Promise((resolve) => setTimeout(resolve, 15000));
+    expect(createdUser).toBeTruthy();
   });
 });
